@@ -156,13 +156,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
-    function getPositionCoords(position) {
+        function getPositionCoords(position) {
         const positionMap = {
             'Pitcher': {x: 45, y: 60}, 'Catcher': {x: 45, y: 85},
             'First Base': {x: 65, y: 55}, 'Second Base': {x: 57, y: 45},
             'Third Base': {x: 28, y: 55}, 'Shortstop': {x: 35, y: 45},
-            'Left Field': {x: 10, y: 10}, 'Right Center Field': {x: 30, y: 22},
-            'Left Center Field': {x: 63, y: 22}, 'Right Field': {x: 90, y: 10}
+            'Left Field': {x: 15, y: 38}, 'Right Center Field': {x: 63, y: 22},
+            'Left Center Field': {x: 30, y: 22}, 'Right Field': {x: 75, y: 38}
         };
         return positionMap[position] || {x: 50, y: 50}; // Default center position if undefined
     }
