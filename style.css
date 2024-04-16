@@ -41,7 +41,7 @@ th, td {
     padding: 11px;
     border: 1px solid #ccc;
     text-align: Center;
-    line-height: 10px; /* Adjust this value to change the row height */
+    line-height: 5px; /* Adjust this value to change the row height */
     padding: 11px; /* Increase padding to make rows taller */
 }
 
