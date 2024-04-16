@@ -18,18 +18,20 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    line-height: 50px;
 }
 
 .bench-container {
     width: 90%;
-    margin-top: 20px;
+    margin-top: 1px;
 }
 
 input[type="text"], select, button {
-    padding: 8px;
-    margin: 10px 0;
+
+    margin: 1px 0;
     width: 90%;
-    font-size: 16px;
+    font-size: 14px;
+   
 }
 
 table {
@@ -38,11 +40,10 @@ table {
 }
 
 th, td {
-    padding: 11px;
     border: 1px solid #ccc;
     text-align: Center;
     line-height: 5px; /* Adjust this value to change the row height */
-    padding: 11px; /* Increase padding to make rows taller */
+    padding: 8px; /* Increase padding to make rows taller */
 }
 
 th {
@@ -67,3 +68,4 @@ th {
     border-radius: 5px;
     text-align: center;
 }
+
