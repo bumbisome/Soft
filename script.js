@@ -164,6 +164,6 @@ document.addEventListener('DOMContentLoaded', function() {
             'Left Field': {x: 15, y: 38}, 'Right Center Field': {x: 63, y: 22},
             'Left Center Field': {x: 30, y: 22}, 'Right Field': {x: 75, y: 38}
         };
-        return positionMap[position] || {x: 50, y: 50}; // Default center position if undefined
+        return positionMap[position] || {x: 100, y: 1}; // Default center position if undefined
     }
 });
