@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let players = [];
     const playerNameInput = document.getElementById('playerNameInput');
     const lineupBody = document.getElementById('lineupBody');
     const benchBody = document.getElementById('benchBody');
+
+    let players = JSON.parse(localStorage.getItem("Team 1"));
+    players.sort((a, b) => a.order - b.order);
 
     playerNameInput.addEventListener('keypress', function(event) {
         if (event.key === 'Enter' && this.value.trim() !== '') {
@@ -20,6 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
             notes: ''  // Additional field for notes
         };
         players.push(newPlayer);
+        console.log(players)
+        localStorage.setItem("Team 1", JSON.stringify(players));
         updateTables();
     }
 
@@ -40,10 +44,10 @@ document.addEventListener('DOMContentLoaded', function() {
         row.setAttribute('draggable', 'true');
         row.setAttribute('id', 'player-' + player.id);
         row.innerHTML = `
-            <td>${index + 1}</td>
+            <td>${player.order}</td>
             <td>${player.name}</td>
             <td>
-                <select onchange="updatePlayerPosition(this, ${player.id})">
+                <select onchange="updatePlayerPosition(this, ${player.order})">
                     <option value="">Assign Position</option>
                     <option value="Pitcher">Pitcher</option>
                     <option value="Catcher">Catcher</option>
@@ -58,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <option value="Bench">Bench</option>
                 </select>
             </td>
-            <td><button onclick="removePlayer(${player.id})">Delete</button></td>
+            <td><button onclick="removePlayer(${player.order})">Delete</button></td>
         `;
         row.cells[2].children[0].value = player.position;
         setupDraggableRows(row);
@@ -70,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const benchRow = benchBody.insertRow();
             setBenchRowData(benchRow, player);
         });
+        localStorage.setItem("Team 1", JSON.stringify(players));
     }
 
     function setBenchRowData(benchRow, player) {
@@ -82,16 +87,19 @@ document.addEventListener('DOMContentLoaded', function() {
     window.updatePlayerPosition = (select, playerId) => {
         const player = players.find(p => p.id === playerId);
         player.position = select.value;
+        localStorage.setItem("Team 1", JSON.stringify(players));
         updateTables();  // Refresh both tables when position changes
     };
 
     window.updateNotes = (notes, playerId) => {
         const player = players.find(p => p.id === playerId);
         player.notes = notes;
+        localStorage.setItem("Team 1", JSON.stringify(players));
     };
 
     window.removePlayer = (playerId) => {
         players = players.filter(p => p.id !== playerId);
+        localStorage.setItem("Team 1", JSON.stringify(players));
         updateTables();
     };
 
@@ -140,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
             player.order = index + 1;
             row.cells[0].textContent = index + 1;
         });
+        localStorage.setItem("Team 1", JSON.stringify(players));
     }
 
     window.generateField = function() {
@@ -166,4 +175,8 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         return positionMap[position] || {x: 100, y: 1}; // Default center position if undefined
     }
+    
+    // onLoad methods
+    updateTables();
+    window["generateField"]();
 });
